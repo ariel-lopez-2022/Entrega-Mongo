@@ -29,7 +29,7 @@ const getsendMessage = async(req, res)=>{
   }else{
     return res.json({
       msg: 'Chats',
-      playlist:getMessage
+      chats:getMessage
     });      
  }
 
@@ -46,7 +46,7 @@ const deleteMessage = async (req, res)=>{
     emitDeleteMj(deleteMessaje)
     return res.json({
       msg: 'Mensaje Eliminado',
-      playlist:deleteMessaje
+      chats:deleteMessaje
     });      
  }
 

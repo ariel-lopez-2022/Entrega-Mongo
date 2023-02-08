@@ -27,9 +27,10 @@ class BdCartsManager {
          }   
 	}
 
-    addProductToCarts = async (carts, product) => {
-
-    }  
+    addProductToCarts = async (cid, pid) => {
+       console.log("aqui")
+    }
 }
+
 
 module.exports = BdCartsManager 

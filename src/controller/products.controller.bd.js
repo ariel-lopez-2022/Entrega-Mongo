@@ -1,20 +1,14 @@
 const BdProductManager = require("../dao/mongoManager/BdProductManager");
-const Products = new BdProductManager('../../asets/product.json');
+const Products = new BdProductManager();
 
 
 const getProductsBd = async (req, res) => {
   const {limit: limite = ""} = req.query;
        const products = await Products.getProduct(limite);
        if (products){
-          return res.json({
-            msg: 'Ok',
-            playload: products,
-         });      
+          res.json(products)      
        }else{
-        return res.json({
-          msg: 'No se puedo mostrar Producto',
-          
-       });      
+        res.json(products)  
 
        }
 
@@ -25,17 +19,11 @@ const addProductBd = async (req, res)=>{
   const product = req.body;
     const newproduct = await Products.addProduct(product);
     if (newproduct){
-      return res.json({
-        msg: 'Producto Agregado',
-        playload: newproduct,
-      });      
+      res.json(newproduct)    
     }else{
-      return res.json({
-        msg: 'No se puedo Crear Producto',
-        
-     });      
+      res.json(newproduct)
+          
     }
-  
 }
 
 
@@ -43,15 +31,9 @@ const getProductIdBd = async (req, res)=>{
   const id = req.params.pid 
   const getProductId = await Products.getProductId(id);
   if (getProductId){
-    return res.json({
-      msg: 'Producto Encontrado',
-      playload: getProductId,
-    });      
+    res.json(getProductId)      
   }else{
-    return res.json({
-      msg: 'Producto No encontrado',
-      
-   });      
+    res.json(getProductId)
   }
 
 
@@ -63,15 +45,9 @@ const UpdateProductBd = async (req, res)=>{
   const product = req.body
   const UpdateProductId = await Products.UpdateProduct(id, product);
   if (UpdateProductId){
-    return res.json({
-      msg: 'Producto Actualizado',
-      playload: UpdateProductId,
-    });      
+     res.json(UpdateProductId)      
   }else{
-    return res.json({
-      msg: 'Producto No Actualizado',
-      
-   });      
+    res.json(UpdateProductId)  
   }
   
 
@@ -81,15 +57,9 @@ const deleteProductBd = async (req, res)=>{
   const id = req.params.pid 
     const deleteproduct = await Products.DeleteProductId(id);
     if (deleteproduct){
-      return res.json({
-        msg: 'Producto Eliminado',
-        playload: deleteproduct,
-      });      
+      res.json(deleteproduct)      
     }else{
-      return res.json({
-        msg: 'Producto No Eliminado'
-        
-     });      
+      res.json(deleteproduct)
     }
 }
 

@@ -1,5 +1,6 @@
 const ProductManager = require("../dao/fsManager/ProductManager");
 const ChatsManager = require('../dao/mongoManager/BdChatsManager')
+
 const Product = new ProductManager('./assets/product.json');
 const Chat = new ChatsManager();
 
@@ -11,9 +12,10 @@ const connectionSocket = (httpServer)=>{
     io.on ('connection', async (socket)=>{
         console.log("Nuevo Clinte conectado")
         const products = await Product.getProducts();
+        console.log(products)
         const Chats  = await Chat.getMessage();
         socket.emit('init-products', products)
-        socket.emit('init-chats' ,{Chats})
+        socket.emit('init-chats' ,Chats)
     });
 }
 
@@ -30,9 +32,9 @@ const connectionSocket = (httpServer)=>{
     io.emit('add-message', newMessage )
  } 
 
- const emitDeleteMj = (messaje)=>{
-    console.log(`Mensaje Eliminado: ${JSON.stringify(messaje)}`)
-    io.emit('delete-message', messaje)
+ const emitDeleteMj = (message)=>{
+    console.log(`Mensaje Eliminado: ${JSON.stringify(message)}`)
+    io.emit('delete-message', message)
 }
 
 

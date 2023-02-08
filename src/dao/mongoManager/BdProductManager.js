@@ -5,12 +5,8 @@ class BdProductManager {
 		this.products = []
 	}
 
-	
-
-	getProduct = async (limite) => {
-        console.log(limite)
+  getProduct = async (limite) => {
 		try{  
-
             if (limite){
                 const products = await productModel.find().limit(limite);
                  return products
@@ -19,18 +15,16 @@ class BdProductManager {
                 const products = await productModel.find();
                  return products
             }
-            
            } catch (error) {
               return {msg:"Error al Obtener Productos"}    
              
            }   
-            
 	}
 
     addProduct = async (product) => {
 	  try {
         const newproduct = await productModel.create(product);
-        return newproduct
+        return ({msg:"Producto Creado", newproduct})
         
       } catch (error) {
         return {msg:"Error al Crear Producto"}
@@ -41,10 +35,10 @@ class BdProductManager {
     getProductId = async (id) =>{
         try {
             const getproductId = await productModel.findById(id);
-            return  getproductId
+            return ({msg:"Producto Encontrado", getproductId})
 
           } catch (error) {
-            return {msg:"Error al Buscar Producto"}
+            return {msg:"Producto no encontrado"}
           }   
 
 
@@ -69,7 +63,7 @@ class BdProductManager {
 
           } catch (error) {
 
-            return {msg:"Error al Actualizar Producto"}
+            return {msg:"Error al Eliminar Producto"}
           }   
 
     }

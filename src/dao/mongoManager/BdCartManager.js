@@ -17,18 +17,41 @@ class BdCartsManager {
          }   
     } 	
 
-	getCarts = async (id) => {
+	getCartsId = async (id) => {
+        
         try{  
-            const cart = await cartsModel.findById(id);
-            return cart
-
+             const cart = await cartsModel.findById(id);
+             return cart
+      
         } catch (error) {
            return {msg:"Error Al Mostrar Carrito"}
          }   
 	}
 
-    addProductToCarts = async (cid, pid) => {
-       console.log("aqui")
+    getCarts = async () => {
+        try{  
+                const cart = await cartsModel.find();
+                return cart
+        
+        } catch (error) {
+           return {msg:"Error Al Mostrar Carrito"}
+         }   
+	}
+
+
+
+
+
+
+    addProductToCarts = async (cid, product) => {
+        const cart = await cartsModel.findById(cid);
+        console.log(JSON.stringify(product))
+       const resultado = cart.products.findIndex((prod) => prod.id == product.id)
+       if (resultado == -1){
+           
+        }else{
+           
+        }
     }
 }
 

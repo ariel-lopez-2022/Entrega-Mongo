@@ -4,10 +4,13 @@ const chatModel = require ('../models/chatsmodel')
 class ChatsManager {
     
     sendMessage = async (message)=>{
-         try {
+        
+        try {
             const saveMessage = await chatModel.create(message)
+            console.log(saveMessage)
              return saveMessage
          } catch (error) {
+
             return {msg:'No se puedo Grabar el Mensaje'}
          }
     }

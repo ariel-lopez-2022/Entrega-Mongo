@@ -3,22 +3,7 @@ const Chats = new BdChatsManager()
 const {emitMessage} = require('../utils/soket.io')
 const {emitDeleteMj} = require('../utils/soket.io')
 
-const sendMessage = async(req, res)=>{
-    const message = req.body
-   
-    const saveMessage = await Chats.sendMessage(message)
-    if (!saveMessage){
-      return res.json({
-        msg: 'No se puedo enviar Mensaje',
-     });      
-    }else{
-        emitMessage(saveMessage)     
-        return res.json({
-          msg: 'Mensaje Enviado',
-          playlist:saveMessage,
-        })  
-      }
-}
+
 
 const getsendMessage = async(req, res)=>{
     const getMessage = await Chats.getMessage()
@@ -34,6 +19,25 @@ const getsendMessage = async(req, res)=>{
  }
 
 }
+
+const sendMessage = async(req, res)=>{
+  const message = req.body
+  const saveMessage = await Chats.sendMessage(message)
+ 
+  if (!saveMessage){
+    return res.json({
+      msg: 'No se puedo enviar Mensaje',
+   });      
+  }else{
+      emitMessage(saveMessage)     
+      return res.json({
+        msg: 'Mensaje Enviado',
+        playlist:saveMessage,
+      })  
+    }
+}
+
+
 
 const deleteMessage = async (req, res)=>{
   const id = req.params.chid

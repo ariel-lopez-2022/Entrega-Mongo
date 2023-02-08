@@ -35,7 +35,7 @@ class BdProductManager {
     getProductId = async (id) =>{
         try {
             const getproductId = await productModel.findById(id);
-            return ({msg:"Producto Encontrado", getproductId})
+            return getproductId
 
           } catch (error) {
             return {msg:"Producto no encontrado"}

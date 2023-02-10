@@ -18,6 +18,7 @@ class ChatsManager {
     getMessage = async ()=>{
         try {
             const messages = await chatModel.find()
+            console.log(messages)
             return messages
         } catch (error) {
             return {msg:'No se puedo Mostrar mensajes'}

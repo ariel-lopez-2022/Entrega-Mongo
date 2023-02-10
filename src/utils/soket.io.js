@@ -12,7 +12,6 @@ const connectionSocket = (httpServer)=>{
     io.on ('connection', async (socket)=>{
         console.log("Nuevo Clinte conectado")
         const products = await Product.getProducts();
-        console.log(products)
         const Chats  = await Chat.getMessage();
         socket.emit('init-products', products)
         socket.emit('init-chats' ,Chats)

@@ -38,7 +38,7 @@ class BdProductManager {
             return getproductId
 
           } catch (error) {
-            return {msg:"Producto no encontrado"}
+            return  {msg:"Error al Emcontrar Producto"}
           }   
 
 

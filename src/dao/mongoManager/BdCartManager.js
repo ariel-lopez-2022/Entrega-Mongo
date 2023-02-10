@@ -24,35 +24,26 @@ class BdCartsManager {
              return cart
       
         } catch (error) {
-           return {msg:"Error Al Mostrar Carrito"}
+           return {msg:"Carrito Inexistente"}
          }   
 	}
 
-    getCarts = async () => {
-        try{  
-                const cart = await cartsModel.find();
-                return cart
-        
-        } catch (error) {
-           return {msg:"Error Al Mostrar Carrito"}
-         }   
-	}
-
-
-
-
-
-
-    addProductToCarts = async (cid, product) => {
-        const cart = await cartsModel.findById(cid);
-        console.log(JSON.stringify(product))
-       const resultado = cart.products.findIndex((prod) => prod.id == product.id)
-       if (resultado == -1){
-           
-        }else{
-           
-        }
+   
+    addProductToCarts = async (newCart) => {
+        const Createcart = await cartsModel.create(newCart);
+        return Createcart
     }
+
+    updateToCart = async(cart)=>{
+        const cartUpdate = await cartsModel.findByIdAndUpdate(cart.id, cart, {
+            new:true
+        })
+        return cartUpdate
+
+    }
+
+    
+
 }
 
 
